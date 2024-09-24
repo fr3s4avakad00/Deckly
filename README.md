@@ -36,7 +36,7 @@ This project is designed to create an interactive quiz application. It features 
 
 For detailed planning and specifications, please refer to the following documents:
 
-- [Planning Document](link_to_your_planning_document)
+- [Planning Document](https://docs.google.com/document/d/1NxcU5BQWk3Ds6V_Zy2exk5Fpl4MntixdXpSHRBxUAlk/edit?pli=1)
 
 ## Future Enhancements
 
