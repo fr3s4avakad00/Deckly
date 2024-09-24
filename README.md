@@ -1,54 +1,57 @@
-# Quiz Project
+# Deckly (Study Helper)
 
-## Overview
+Deckly is a study assistant tool that helps users organize and review their notes using text extraction, flashcards, quizzes, and GPT-4 powered summarization. With Deckly, users can upload handwritten or digital notes, convert them into flashcards, take quizzes, and even chat with GPT-4 for summaries or Q&A about their study materials.
 
-This project is designed to create an interactive quiz application. It features a structured quiz object that contains multiple choice questions, images, and a user-friendly interface for quiz creation and participation.
+## Features
 
-## Project Structure
+### 1. Backend (HTML/Server Logic)
+- **OCR Engine**: Uses Tesseract or Google Vision API to extract text from images uploaded by users.
+- **Output**: Extracted text is used across the app, such as for flashcards, quizzes, and summaries.
 
-- **Quiz Object**: 
-  - An array of question objects, each containing:
-    - An array of possible answers (multiple choice).
-    - An image related to the question.
-    - The correct answer for validation.
-  
-- **Question Format**:
-  - Display questions with an image in the center of the screen.
-  - Four buttons for multiple choice answers.
-  
-- **Home Screen**:
-  - Set up visual formatting for the home screen.
-  - Include buttons to navigate to different functionalities (e.g., start quiz, create quiz).
+### 2. Image-to-Text Conversion
+- **Image Upload**: Users upload images of handwritten or digital notes.
+- **Text Extraction**: OCR engine extracts text from the uploaded images.
 
-## User Interface (UI)
+### 3. Frontend (User Interface)
+- **Flashcard Creation**: Allows users to create flashcards from extracted text.
+- **Testing/Quiz Section**: Enables users to take quizzes based on the flashcards or uploaded notes.
+- **Chat Interface**: Lets users interact with GPT-4 for summarization and Q&A.
+- **Navigation/UX**: Ensures a smooth transition between uploading, studying, and testing.
 
-- **Buttons**:
-  - A button to upload files for quiz content (multiple files allowed).
-  - A button to create a new quiz.
-  - A UI for making the actual quiz, including:
-    - Multiple choice buttons for answers.
-    - A "Next" button to navigate through questions (or automatically transition to the next question).
-  
-- **Text Paragraphs**:
-  - Sections for displaying quiz instructions, question text, and feedback to the user.
+### 4. Flashcard System
+- **Text-to-Flashcard Generator**: Converts extracted text into flashcards for studying.
+- **Flashcard Storage**: Saves flashcards for future use and review.
+- **Flashcard UI**: Displays flashcards for easy studying.
 
-## Planning and Documentation
+### 5. Testing/Quiz System
+- **Quiz Generator**: Creates quizzes from flashcards or extracted notes.
+- **Test Results**: Tracks user progress and displays scores.
 
-For detailed planning and specifications, please refer to the following documents:
+### 6. GPT-4 Integration
+- **Summarization**: Uses GPT-4 to generate summaries from extracted notes.
+- **Question/Answer Chat**: Users can ask questions about their notes, and GPT-4 will provide answers.
+- **Key Points Generation**: Extracts key points from the notes for quick review.
 
-- [Planning Document](https://docs.google.com/document/d/1NxcU5BQWk3Ds6V_Zy2exk5Fpl4MntixdXpSHRBxUAlk/edit?pli=1)
+## Getting Started
+1. **Image Upload**: Users can upload images of their notes.
+2. **Text Extraction**: The OCR engine extracts text.
+3. **Flashcard Creation**: Flashcards are generated from the extracted text.
+4. **Study**: Users review the flashcards, chat with GPT-4, or take quizzes.
+5. **Test**: Take quizzes to assess knowledge and track progress.
 
-## Future Enhancements
+## Tech Stack
+- **Frontend**: JavaScript for the user interface.
+- **Backend**: HTML and server logic for image uploads and text processing.
+- **OCR Engine**: Tesseract or Google Vision API for image-to-text conversion.
+- **GPT-4**: Integrated for summarization, Q&A, and content generation.
 
-- Add a scoring system to track user performance.
-- Implement a timer for quizzes.
-- Provide feedback on correct/incorrect answers.
-- Enhance the UI with additional styling and animations.
+## Future Features
+- Advanced quiz customization.
+- Enhanced flashcard systems with spaced repetition.
+- Detailed progress analytics.
 
-## Contribution
-
-If you would like to contribute to this project, please feel free to submit issues or pull requests.
+## Contributing
+We welcome contributions! Please fork the repository, make your changes, and submit a pull request.
 
 ## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
