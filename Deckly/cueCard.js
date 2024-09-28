@@ -9,9 +9,14 @@ class cueCard{
 
     createCueCardElement(){
         var cueCardContainer=document.getElementById("cardDivs");
-        this.cueCardElement=document.createElement("div");
-        this.cueCardElement.id="cueCard"+this.id;
-        this.cueCardElement.style.display="none";
+        this.cueCardElement=document.createElement("textarea");
+        this.cueCardElement.rows=8;
+        this.cueCardElement.cols=35;
+        this.cueCardElement.placeholder="write paragraph here";
+        this.text=document.createElement("input");
+        this.text.type="text";
+        this.cueCardElement.appendChild(this.text);
+        cueCardContainer.appendChild(this.cueCardElement);
     }
 
     show() {
@@ -21,6 +26,6 @@ class cueCard{
     hide() {
         this.cueCardElement.style.display = "none";
     }
-};
+}
 
 export default cueCard;
