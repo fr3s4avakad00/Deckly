@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Deckly</title>
+    </head>
+    <body>
+        <header>
+            <h1>Deckly</h1>
+        </header>
+        <main>
+            <section id="cue-card-creator">
+                <h2>Cue card creator</h2>
+                <input type="file" id="fileInput"><br>
+                <button id="createCueCardButton">Create a cue card</button>
+    
+            </section>
+            <div class="container" id="cardDivs">
+            <!--Card icons/button to be added later-->
+            </div>
+            <section id="Exit">
+                <h2>Exit</h2>
+                <button onclick="exit()">Exit</button>
+            </section>
+
+        </main>
+        
+        <!-- Cue Card structure using table -->
+        <table id="cueCard" border="1" cellpadding="10" cellspacing="0" style="display: none; width: 80%; height: 60%;">
+            <tr>
+                <td>
+                    <h2>Cue Card Title</h2>
+                    <p>This is the content of the cue card.</p>
+                    <button onclick="hideCueCard()">Close Cue Card</button>
+                </td>
+            </tr>
+        </table>
+    
+        <script type="module" src="cueCard.js"></script>
+        <script type="module" src="account.js"></script>
+    </body>
+</html>
