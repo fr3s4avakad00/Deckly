@@ -15,7 +15,7 @@ exist. Then, we iterate over each element in myCueCards using .map, and execute 
 of those elements, and take all of that info and put it in the new cueCard object returned by the 
 arrow function*/
 var myCueCards=(JSON.parse(localStorage.getItem("myCueCards")) || []).map(cueCardData => {
-    return new cueCard(cueCardData.id, cueCardData.text);
+    return new cueCard(cueCardData.id, cueCardData.question, cueCardData.answer);
 });
 
 const cueCardDivs=document.getElementById("cardDivs");
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function (){
 
     const createCueCardButton=document.getElementById("createCueCardButton");
     createCueCardButton.addEventListener("click", function(){
-        const newCueCard=new cueCard(myCueCards.length);
+        const newCueCard=new cueCard(myCueCards.length, "", "");
         newCueCard.id=myCueCards.length;
         myCueCards.push(newCueCard);
 
@@ -36,10 +36,12 @@ document.addEventListener('DOMContentLoaded', function (){
     });
 });
 
-function openCueCard(cueCardId){
-    window.location.href="cueCard.html?id=${cueCardId}";
+//this opens a cueCard
+function openCueCard(cueCard){
+    window.location.href=`cueCard.html?id=${cueCard.id}`;
 }
 
+//this deletes a cue card
 function deleteCueCard(cueCardId){
     // the filter loops through the array, and if the element the iterator is on is not
     // equal to the specified cuecard's id which we want to delete, it adds it keeps it 
@@ -48,23 +50,21 @@ function deleteCueCard(cueCardId){
     //thats why it compares card.id (the id of the current card iterator is looking at)
     //with cueCardId, which is the id of the specified cuecard
     myCueCards = myCueCards.filter(card => card.id !== cueCardId);
-
     localStorage.setItem("myCueCards", JSON.stringify(myCueCards));
-
     reloadCueCards(myCueCards);
 }
 
+//this just reloads all the cue card objects on the account page
 function reloadCueCards(cueCardArray){
     cueCardDivs.innerHTML="";
     for (let i=0; i<cueCardArray.length; i++){
         var cueCardHomeText=document.createElement("p");
         cueCardHomeText.textContent="Cue card " + cueCardArray[i].id;
 
-        var openButton = document.createElement("button");
-        openButton.textContent = "Open Cue Card";
+        var editButton = document.createElement("button");
+        editButton.textContent = "Edit Cue Card";
         openButton.onclick=function(){
-            openCueCard(cueCardArray[i].id);
-            cueCardArray[i].loadCueCardContent();
+            openCueCard(cueCardArray[i]);
         };
 
         var deleteButton = document.createElement("button");
