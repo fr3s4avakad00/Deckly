@@ -1,3 +1,4 @@
+
 function createQuiz() {
     window.location.href = 'createQuiz.html';
     
