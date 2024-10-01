@@ -35,15 +35,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 img.onload = function () {
                     Tesseract.recognize(
                         img,
-                        'eng', // Use the desired language here
+                        'eng',
                         {
                             logger: info => console.log(info) // Optional logger for progress
                         }
                     ).then(({ data: { text } }) => {
                         document.getElementById("detectedText").innerText = text;
+                        
+                        // Log the extracted text to the console for testing purposes
+                        console.log("Extracted text from detectedText div: ", text); 
                     }).catch(err => {
                         console.error("Error during OCR:", err);
                     });
+                    
                 };
             };
 
