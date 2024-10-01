@@ -20,7 +20,6 @@ var myCueCards=(JSON.parse(localStorage.getItem("myCueCards")) || []).map(cueCar
 
 const cueCardDivs=document.getElementById("cardDivs");
 
-
 document.addEventListener('DOMContentLoaded', function (){
     reloadCueCards(myCueCards);
 
@@ -53,6 +52,26 @@ function deleteCueCard(cueCardId){
     localStorage.setItem("myCueCards", JSON.stringify(myCueCards));
     reloadCueCards(myCueCards);
 }
+
+//fileDirectores is strictly an array of 3 paths each pointing to a specific txt file
+//Eg [dir1, dir2, dir3]
+function createCueCards(fileDirectories){
+    var reader = new FileReader();
+    for (var i=0; i<3; i++){
+        //read three files
+        const file=fileDirectories[i];
+        reader.onload = function(event){
+            const file=event.target.result;
+            const allLines=file.split("\n");
+            allLines.forEach(line => {
+                console.log(line);
+            });
+        }
+    }
+}
+
+var browseFiles=document.getElementById('fileInput');
+//browseFiles.onload=function(){createCueCards(browseFiles.)}
 
 //this just reloads all the cue card objects on the account page
 function reloadCueCards(cueCardArray){
