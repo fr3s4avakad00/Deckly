@@ -1,100 +1,76 @@
-import cueCard from './cueCard.js';
+import cueCard from './cueCard.js'; 
+//this is the user's account
 
-// Initialize cue cards from localStorage
-var myCueCards = (JSON.parse(localStorage.getItem("myCueCards")) || []).map(cueCardData => {
-    return new cueCard(cueCardData.id, cueCardData.text);
+/*the problem is that if we want to save myCueCards, the way the localStorage works 
+breaks some things in the object and the loadCueCardContent class method is not recognized as a cueCard
+object, rather it would be plain types, it would look something like this:
+
+[
+   {"id": 0, "text": "First cue card"},
+   {"id": 1, "text": "Second cue card"}
+]
+
+To solve this we have to either read my cue cards from storage if it exists or create it if it does not
+exist. Then, we iterate over each element in myCueCards using .map, and execute a function to each
+of those elements, and take all of that info and put it in the new cueCard object returned by the 
+arrow function*/
+var myCueCards=(JSON.parse(localStorage.getItem("myCueCards")) || []).map(cueCardData => {
+    return new cueCard(cueCardData.id, cueCardData.question, cueCardData.answer, cueCardData.currentSide);
 });
 
-const cueCardDivs = document.getElementById("cardDivs");
+const cueCardDivs=document.getElementById("cardDivs");
 
-document.addEventListener('DOMContentLoaded', function () {
+
+document.addEventListener('DOMContentLoaded', function (){
     reloadCueCards(myCueCards);
 
-    const createCueCardButton = document.getElementById("createCueCardButton");
-    createCueCardButton.addEventListener("click", function () {
-        const newCueCard = new cueCard(myCueCards.length);
-        newCueCard.id = myCueCards.length;
+    const createCueCardButton=document.getElementById("createCueCardButton");
+    createCueCardButton.addEventListener("click", function(){
+        const newCueCard=new cueCard(myCueCards.length, "", "", false);
+        newCueCard.id=myCueCards.length;
         myCueCards.push(newCueCard);
 
         localStorage.setItem("myCueCards", JSON.stringify(myCueCards));
+
         reloadCueCards(myCueCards);
-    });
-
-    // Upload Notes functionality
-    document.getElementById("uploadNoteButton").addEventListener("click", function () {
-        const fileInput = document.getElementById("noteFileInput");
-        const file = fileInput.files[0];
-
-        if (file) {
-            const reader = new FileReader();
-
-            reader.onload = function (event) {
-                const img = new Image();
-                img.src = event.target.result;
-
-                img.onload = function () {
-                    Tesseract.recognize(
-                        img,
-                        'eng',
-                        {
-                            logger: info => console.log(info) // Optional logger for progress
-                        }
-                    ).then(({ data: { text } }) => {
-                        document.getElementById("detectedText").innerText = text;
-                        
-                        // Log the extracted text to the console for testing purposes
-                        console.log("Extracted text from detectedText div: ", text); 
-                    }).catch(err => {
-                        console.error("Error during OCR:", err);
-                    });
-                    
-                };
-            };
-
-            reader.readAsDataURL(file);
-        } else {
-            alert("Please upload an image file.");
-        }
     });
 });
 
-// Function to open a cue card
-function openCueCard(cueCardId) {
-    window.location.href = `cueCard.html?id=${cueCardId}`;
+//this opens a cueCard
+function openCueCard(cueCard){
+    window.location.href=`cueCard.html?id=${cueCard.id}`;
 }
 
-// Function to delete a cue card
-function deleteCueCard(cueCardId) {
+//this deletes a cue card
+function deleteCueCard(cueCardId){
+    // the filter loops through the array, and if the element the iterator is on is not
+    // equal to the specified cuecard's id which we want to delete, it adds it keeps it 
+    // in the myCueCardsArray 
+    // card represents current cue card the iterator is looking at
+    //thats why it compares card.id (the id of the current card iterator is looking at)
+    //with cueCardId, which is the id of the specified cuecard
     myCueCards = myCueCards.filter(card => card.id !== cueCardId);
     localStorage.setItem("myCueCards", JSON.stringify(myCueCards));
     reloadCueCards(myCueCards);
 }
 
-// Function to reload cue cards
-function reloadCueCards(cueCardArray) {
-    cueCardDivs.innerHTML = "";
-    for (let i = 0; i < cueCardArray.length; i++) {
-        var cueCardHomeText = document.createElement("p");
-        cueCardHomeText.textContent = "Cue card " + cueCardArray[i].id;
+//this just reloads all the cue card objects on the account page
+function reloadCueCards(cueCardArray){
+    cueCardDivs.innerHTML="";
+    for (let i=0; i<cueCardArray.length; i++){
+        var cueCardHomeText=document.createElement("p");
+        cueCardHomeText.textContent="Cue card " + cueCardArray[i].id;
 
-        var openButton = document.createElement("button");
-        openButton.textContent = "Open Cue Card";
-        openButton.onclick = function () {
-            openCueCard(cueCardArray[i].id);
-            cueCardArray[i].loadCueCardContent();
-        };
+        var editButton = document.createElement("button");
+        editButton.textContent = "Edit Cue Card";
+        editButton.onclick=function(){openCueCard(cueCardArray[i]);};
 
         var deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete Cue Card";
-        deleteButton.onclick = function () { deleteCueCard(cueCardArray[i].id) };
+        deleteButton.onclick=function(){deleteCueCard(cueCardArray[i].id)};
 
         cueCardDivs.appendChild(cueCardHomeText);
-        cueCardDivs.appendChild(openButton);
+        cueCardDivs.appendChild(editButton);
         cueCardDivs.appendChild(deleteButton);
     }
-}
-
-// Function to exit the application
-function exit() {
-    window.location.href = 'helo.html';
 }
