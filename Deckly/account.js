@@ -33,10 +33,15 @@ document.addEventListener('DOMContentLoaded', function (){
 
         reloadCueCards(myCueCards);
     });
+
+    const exitButton = document.getElementById("exitButton");
+    exitButton.addEventListener("click", function(){
+        window.location.href=`helo.html`;
+    });
 });
 
 //this opens a cueCard
-function openCueCard(cueCard){
+function editCueCard(cueCard){
     window.location.href=`cueCard.html?id=${cueCard.id}`;
 }
 
@@ -55,23 +60,35 @@ function deleteCueCard(cueCardId){
 
 //fileDirectores is strictly an array of 3 paths each pointing to a specific txt file
 //Eg [dir1, dir2, dir3]
+var fileArray = [];
 function createCueCards(fileDirectories){
-    var reader = new FileReader();
-    for (var i=0; i<3; i++){
+    for (var i=0; i<fileDirectories.length; i++){
         //read three files
+        const reader = new FileReader();
         const file=fileDirectories[i];
         reader.onload = function(event){
-            const file=event.target.result;
-            const allLines=file.split("\n");
-            allLines.forEach(line => {
-                console.log(line);
-            });
-        }
+            const fileContent=event.target.result;
+            const allLines=fileContent.split("\n");
+
+            const newCueCard=new cueCard(myCueCards.length, allLines[0], allLines[1], false);
+            newCueCard.id=myCueCards.length;
+            myCueCards.push(newCueCard);
+
+            localStorage.setItem("myCueCards", JSON.stringify(myCueCards));
+
+            reloadCueCards(myCueCards);
+        };
+        reader.readAsText(file);
     }
 }
 
+//createCueCards(fileArray);
+
 var browseFiles=document.getElementById('fileInput');
-//browseFiles.onload=function(){createCueCards(browseFiles.)}
+browseFiles.addEventListener("change", function(event){
+    var files=browseFiles.files;
+    createCueCards(files);
+});
 
 //this just reloads all the cue card objects on the account page
 function reloadCueCards(cueCardArray){
@@ -82,7 +99,7 @@ function reloadCueCards(cueCardArray){
 
         var editButton = document.createElement("button");
         editButton.textContent = "Edit Cue Card";
-        editButton.onclick=function(){openCueCard(cueCardArray[i]);};
+        editButton.onclick=function(){editCueCard(cueCardArray[i]);};
 
         var deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete Cue Card";
