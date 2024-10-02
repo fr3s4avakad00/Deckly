@@ -31,3 +31,4 @@ function extractTextFromImage(file) {
         });
     });
 }
+ 
