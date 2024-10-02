@@ -1,31 +1,45 @@
-
-
-let quizzes = {}; 
+let quizzes = (JSON.parse(localStorage.getItem("myCueCards")) || []).map(cueCardData => {
+    return new quiz(quiz.id, cueCardData.question, cueCardData.answers, cueCardData.correctAnswer);
+});
 let currentQuizName = '';
+
+class quiz {
+    constructor(id, question, answers, correctAnswer){
+        this.id=id;
+        this.question=question;
+        this.answers=answers;
+        this.correctAnswer=correctAnswer;
+    }
+}
 
 function submitQuestion() {
     if (!currentQuizName) {
-        alert("Please enter a quiz name before adding questions.");
-        return;
+        currentQuizName="untitled quiz";
     }
 
     // Get values from the input fields
+    var answers=[];
     let question = document.getElementById('question').value;
     let answer1 = document.getElementById('answer1').value;
+    answers.push(answer1);
     let answer2 = document.getElementById('answer2').value;
+    answers.push(answer2);
     let answer3 = document.getElementById('answer3').value;
+    answers.push(answer3);
     let answer4 = document.getElementById('answer4').value;
+    answers.push(answer4);
     let correctAnswer = parseInt(document.getElementById('correct-answer').value) - 1; // Subtract 1 for index
 
-    
-    if (!quizzes[currentQuizName]) {
+    quizzes.push(new quiz(quizzes.length, question, answers, correctAnswer));
+
+    /*if (!quizzes[currentQuizName]) {
         quizzes[currentQuizName] = { questions: [], answers: [], correctAnswers: [] };
     }
 
     // Store the question and answers
     quizzes[currentQuizName].questions.push(question);
     quizzes[currentQuizName].answers.push([answer1, answer2, answer3, answer4]);
-    quizzes[currentQuizName].correctAnswers.push(correctAnswer);
+    quizzes[currentQuizName].correctAnswers.push(correctAnswer);*/
 
     // Clear the input fields after submission
     clearInputs();
@@ -33,7 +47,7 @@ function submitQuestion() {
     // Log the entire quizzes object to the console
     console.log('Quizzes:', quizzes);
 
-    // Display all stored questions and answers
+  
     displayQuestions();
 }
 
@@ -50,27 +64,24 @@ function displayQuestions() {
     let output = document.getElementById('quiz-output');
     output.innerHTML = ''; // Clear previous output
 
-    if (quizzes[currentQuizName]) {
-        quizzes[currentQuizName].questions.forEach((q, index) => {
-            output.innerHTML += `<h3>Question ${index + 1}: ${q}</h3>`;
-            output.innerHTML += `<p>Answers: ${quizzes[currentQuizName].answers[index].join(', ')}</p>`;
-            output.innerHTML += `<p>Correct Answer Index: ${quizzes[currentQuizName].correctAnswers[index] + 1}</p><hr>`;
-        });
+    for (var i=0; i<quizzes.length; i++){
+        console.log(quizzes[i].answers);
+        output.innerHTML += `<h3>Question: ${quizzes[i].question}</h3>`;
+        output.innerHTML += `<p>Answers: ${quizzes[i].answers.join(', ')}</p>`;
+        output.innerHTML += `<p>Correct Answer Index: ${quizzes[i].correctAnswer + 1}</p><hr>`;
     }
 }
 
 function saveQuiz() {
     currentQuizName = document.getElementById('quiz-name').value;
-
     if (!currentQuizName) {
-        alert("Please enter a quiz name to save.");
-        return;
+        currentQuizName="untitled quiz";
     }
-
-    alert(`Quiz "${currentQuizName}" saved!`);
     console.log('Saved Quiz:', quizzes[currentQuizName]);
     // Optionally clear the quiz name for the next quiz
     document.getElementById('quiz-name').value = '';
+
+    localStorage.setItem("quizzes", quizzes);
 }
 
 function playQuiz() {
@@ -110,4 +121,8 @@ function playQuiz() {
     });
 
     alert(`You scored ${score} out of ${totalQuestions}!`);
+}
+
+function exitQuiz(){
+    window.history.back();
 }
