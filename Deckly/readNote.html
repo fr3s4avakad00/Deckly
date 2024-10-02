@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deckly</title>
+    <title>Deckly - Study Helper</title>
+    <script src="https://cdn.rawgit.com/naptha/tesseract.js/2.1.1/dist/tesseract.min.js"></script>
+    <script src="main.js" defer></script>
+    <script src="ocr.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Deckly</h1>
-    </header>
-    <main>
-        <section id="Read Notes">
-            <h2>Read Notes</h2>
-            <button onclick="createQuiz()">Read Notes</button>
-
-        </section>
-
-    </main>
-    <script src="main.js"></script>
+    <h1>Deckly - Study Helper</h1>
+    
+    <input type="file" id="fileInput" style="display: none;" accept="image/*" />
+    <button id="uploadButton">Upload Notes</button>
+    
+    <div id="extractedText" style="margin-top: 20px;"></div>
 </body>
 </html>
