@@ -1,5 +1,8 @@
 # Deckly (Study Helper)
 
+**NOTICE: repo is unorganized, and I tried fixing it but its janky**
+Please ignore any .js or .html files in the highest directory. If you click into the Deckly Folder from the highest directory, you will find a second Deckly Folder nested in the first one. I tried deleting the second one but it behaves weird. Just ignore anything related to the second Deckly file and what is under it
+
 Deckly is a study assistant tool that helps users organize and review their notes using text extraction, flashcards, quizzes, and GPT-4 powered summarization. With Deckly, users can upload handwritten or digital notes, convert them into flashcards, take quizzes, and even chat with GPT-4 for summaries or Q&A about their study materials.
 
 ## Features

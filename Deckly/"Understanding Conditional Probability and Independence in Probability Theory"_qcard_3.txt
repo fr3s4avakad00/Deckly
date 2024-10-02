@@ -1,0 +1,2 @@
+Question: What is one way to generalize independence among a collection of events?
+Answer: A) Pairwise independence
