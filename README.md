@@ -1,57 +1,101 @@
-# Deckly (Study Helper)
 
-Deckly is a study assistant tool that helps users organize and review their notes using text extraction, flashcards, quizzes, and GPT-4 powered summarization. With Deckly, users can upload handwritten or digital notes, convert them into flashcards, take quizzes, and even chat with GPT-4 for summaries or Q&A about their study materials.
+
+# Deckly - Study Helper
+
+**Deckly** is a comprehensive web-based study tool that allows users to create quizzes, cue cards, and extract text from images. Built using JavaScript, HTML, and Tesseract.js, the project also integrates OpenAI for generating educational content based on images.
+
+---
 
 ## Features
 
-### 1. Backend (HTML/Server Logic)
-- **OCR Engine**: Uses Tesseract or Google Vision API to extract text from images uploaded by users.
-- **Output**: Extracted text is used across the app, such as for flashcards, quizzes, and summaries.
+### 1. Quiz Creator
+- Users can create quizzes by inputting questions, multiple-choice answers, and marking the correct option.
+- Quizzes are stored locally, allowing users to save and replay them.
 
-### 2. Image-to-Text Conversion
-- **Image Upload**: Users upload images of handwritten or digital notes.
-- **Text Extraction**: OCR engine extracts text from the uploaded images.
+### 2. Cue Card Creator
+- Enables users to create cue cards for studying.
+- Users can create, save, edit, and flip cue cards between the question and answer sides for better retention.
 
-### 3. Frontend (User Interface)
-- **Flashcard Creation**: Allows users to create flashcards from extracted text.
-- **Testing/Quiz Section**: Enables users to take quizzes based on the flashcards or uploaded notes.
-- **Chat Interface**: Lets users interact with GPT-4 for summarization and Q&A.
-- **Navigation/UX**: Ensures a smooth transition between uploading, studying, and testing.
+### 3. Text Extraction from Images (OCR)
+- Upload images of notes or documents.
+- Deckly extracts the text from images using Tesseract.js and displays it for review.
 
-### 4. Flashcard System
-- **Text-to-Flashcard Generator**: Converts extracted text into flashcards for studying.
-- **Flashcard Storage**: Saves flashcards for future use and review.
-- **Flashcard UI**: Displays flashcards for easy studying.
+### 4. Text Generation via OpenAI
+- Generates multiple-choice questions and cue cards based on image descriptions.
+- Images are uploaded to Imgur and OpenAI generates a description, followed by MCQs and cue cards.
 
-### 5. Testing/Quiz System
-- **Quiz Generator**: Creates quizzes from flashcards or extracted notes.
-- **Test Results**: Tracks user progress and displays scores.
+---
 
-### 6. GPT-4 Integration
-- **Summarization**: Uses GPT-4 to generate summaries from extracted notes.
-- **Question/Answer Chat**: Users can ask questions about their notes, and GPT-4 will provide answers.
-- **Key Points Generation**: Extracts key points from the notes for quick review.
+## Technologies Used
+- **HTML/CSS**: For structuring and styling the app interface.
+- **JavaScript**: Core functionality for quiz creation, cue cards, and OCR.
+- **Tesseract.js**: Optical Character Recognition (OCR) for text extraction from images.
+- **OpenAI API**: For generating questions and answers from image content.
+- **Imgur API**: For hosting images used in text generation.
+- **LocalStorage**: For saving quiz and cue card data locally.
 
-## Getting Started
-1. **Image Upload**: Users can upload images of their notes.
-2. **Text Extraction**: The OCR engine extracts text.
-3. **Flashcard Creation**: Flashcards are generated from the extracted text.
-4. **Study**: Users review the flashcards, chat with GPT-4, or take quizzes.
-5. **Test**: Take quizzes to assess knowledge and track progress.
+---
 
-## Tech Stack
-- **Frontend**: JavaScript for the user interface.
-- **Backend**: HTML and server logic for image uploads and text processing.
-- **OCR Engine**: Tesseract or Google Vision API for image-to-text conversion.
-- **GPT-4**: Integrated for summarization, Q&A, and content generation.
+## Installation
 
-## Future Features
-- Advanced quiz customization.
-- Enhanced flashcard systems with spaced repetition.
-- Detailed progress analytics.
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/your-username/deckly-study-helper.git
+    cd deckly-study-helper
+    ```
 
-## Contributing
-We welcome contributions! Please fork the repository, make your changes, and submit a pull request.
+2. **Install dependencies**:
+   Make sure you have Node.js and npm installed. Then run:
+    ```bash
+    npm install
+    ```
+
+3. **Environment Setup**:
+   Create a `.env` file in the root directory and add your OpenAI and Imgur credentials:
+    ```bash
+    OPENAI_API_KEY=your-openai-api-key
+    IMGUR_CLIENT_ID=your-imgur-client-id
+    ```
+
+4. **Run the application**:
+   Open `index.html` in your browser to use the app locally.
+
+---
+
+## Project Structure
+```
+deckly-study-helper/
+│
+├── index.html                  # Main HTML file for the app interface
+├── cueCard.js                  # JavaScript class for cue card creation and management
+├── main.js                     # JavaScript file for quiz and cue card logic
+├── ocr.js                      # OCR functionality using Tesseract.js
+├── README.md                   # Project documentation
+├── images/                     # Image storage
+└── output/                     # Output storage for generated MCQs and cue cards
+```
+
+---
+
+## Usage
+
+### 1. Creating a Quiz
+- Go to the "Quiz Creator" section.
+- Enter a quiz name and add questions with answer choices.
+- Mark the correct answer and save the quiz.
+
+### 2. Creating Cue Cards
+- Use the "Cue Card Creator" section to manually add or load cue cards from text files.
+- Each cue card can be edited or deleted.
+
+### 3. Extracting Text from Images
+- Upload an image and Deckly extracts the text using OCR for review.
+
+### 4. Generating MCQs and Cue Cards
+- Images uploaded are processed using Imgur and OpenAI to generate descriptions, MCQs, and cue cards, which are stored in the output folder.
+
+---
 
 ## License
+
 This project is licensed under the MIT License.

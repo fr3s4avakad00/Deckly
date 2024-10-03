@@ -1,0 +1,2 @@
+Question: Two events A and B are considered independent when:
+Answer: C) The joint probability equals the product of their individual probabilities
