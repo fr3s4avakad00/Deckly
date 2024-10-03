@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function (){
         const flipCueCardButton=document.getElementById("flipCueCardButton");
         const displayCurrentSide=document.getElementById("displayCurrentSide");
         displayCurrentSide.textContent="Question side";
+        displayCurrentSide.textContent="Question side";
         if (flipCueCardButton) {
             flipCueCardButton.addEventListener('click', function () {
                 currentCueCard.currentSide = !currentCueCard.currentSide; 
@@ -67,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function (){
                 textArea.value=currentCueCard.currentSide ? currentCueCard.answer : currentCueCard.question;
                 currentCueCard.currentSide ? currentCueCard.answer : currentCueCard.question = textArea.value;
                 localStorage.setItem("myCueCards", JSON.stringify(myCueCards));
+                currentCueCard.currentSide = !currentCueCard.currentSide; 
             });
         }
     } else {
