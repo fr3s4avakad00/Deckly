@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function (){
                 textArea.value=currentCueCard.currentSide ? currentCueCard.answer : currentCueCard.question;
                 currentCueCard.currentSide ? currentCueCard.answer : currentCueCard.question = textArea.value;
                 localStorage.setItem("myCueCards", JSON.stringify(myCueCards));
-                currentCueCard.currentSide = !currentCueCard.currentSide; 
             });
         }
     } else {
