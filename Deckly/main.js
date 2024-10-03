@@ -52,7 +52,7 @@ document.getElementById('fileInput').addEventListener('change', function (event)
 
 // Function definitions for navigation (optional)
 function createQuiz() {
-    window.location.href = 'QuizTestFunction.html';
+    window.location.href = 'quizPage.html';
 }
 
 function createCueCard() {
