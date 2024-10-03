@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function (){
                 currentCueCard.currentSide = !currentCueCard.currentSide; 
                 displayCurrentSide.textContent = currentCueCard.currentSide ? "Answer side" : "Question side";
                 textArea.value=currentCueCard.currentSide ? currentCueCard.answer : currentCueCard.question;
-                currentCueCard.currentSide ? currentCueCard.answer : currentCueCard.question = textArea.value;
+                currentCueCard.currentSide ? currentCueCard.answer = textArea.value: currentCueCard.question = textArea.value;
                 localStorage.setItem("myCueCards", JSON.stringify(myCueCards));
             });
         }
