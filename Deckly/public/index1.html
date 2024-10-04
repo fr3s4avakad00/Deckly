@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload and Image Processing</title>
+</head>
+<body>
+    <h1>Upload a File and Run Image Processing</h1>
+
+    <!-- Form to upload file -->
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="fileInput">Choose a file:</label>
+        <input type="file" id="fileInput" name="file" /><br><br>
+        <button type="submit">Upload</button>
+    </form>
+
+    <!-- Button to run image processing after file upload -->
+    <button id="runButton" style="display:none;">Run Image Processing</button>
+
+    <!-- Status message for user feedback -->
+    <p id="status"></p>
+
+    <script>
+        const uploadForm = document.getElementById('uploadForm');
+        const runButton = document.getElementById('runButton');
+        const status = document.getElementById('status');
+
+        // Handle file upload
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(uploadForm); // Create FormData object with the form data
+
+            status.textContent = 'Uploading file...';
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData,
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    status.textContent = 'File uploaded successfully!';
+                    runButton.style.display = 'inline'; // Show "Run" button after file upload
+                } else {
+                    status.textContent = 'File upload failed.';
+                }
+            } catch (error) {
+                status.textContent = `Error: ${error.message}`;
+            }
+        });
+
+        // Handle the "Run" button click to trigger image processing
+        runButton.addEventListener('click', async () => {
+            status.textContent = 'Processing...';
+
+            try {
+                const response = await fetch('/process-images', { method: 'POST' });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    status.textContent = `Processing Complete: ${data.message}`;
+                } else {
+                    status.textContent = 'Processing failed';
+                }
+            } catch (error) {
+                status.textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

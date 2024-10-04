@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload and Image Processing</title>
+</head>
+<body>
+    <h1>Upload a File and Run Image Processing</h1>
+
+    <!-- Form to upload file -->
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="fileInput">Choose a file:</label>
+        <input type="file" id="fileInput" name="file" /><br><br>
+        <button type="submit">Upload</button>
+    </form>
+
+    <!-- Button to run image processing after file upload -->
+    <button id="runButton" style="display:none;">Run Image Processing</button>
+
+    <!-- Status message for user feedback -->
+    <p id="status"></p>
+
+    <!-- Result div to show the generated output -->
+    <div id="result"></div>
+
+    <!-- Exit Button -->
+    <button id="exitButton">Exit to Helo</button>
+
+    <script>
+        const uploadForm = document.getElementById('uploadForm');
+        const runButton = document.getElementById('runButton');
+        const status = document.getElementById('status');
+        const resultDiv = document.getElementById('result');  // To display the result
+        const exitButton = document.getElementById('exitButton');
+
+        // Handle file upload
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(uploadForm); // Create FormData object with the form data
+
+            status.textContent = 'Uploading file...'; // Initial message
+
+            try {
+                const response = await fetch('http://localhost:3000/upload', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    status.textContent = 'File uploaded successfully! Now processing...';
+                    runButton.style.display = 'inline'; // Show "Run" button after file upload
+
+                    // Automatically run image processing after upload
+                    const processResponse = await fetch('http://localhost:3000/upload', { method: 'POST' });
+                    const processData = await processResponse.json();
+
+                    if (processResponse.ok && processData.success) {
+                        status.textContent = 'Image processed successfully!';
+                        resultDiv.innerHTML = `<h3>Generated Output:</h3><pre>${processData.content}</pre>`;  // Display the content
+                    } else {
+                        status.textContent = 'Processing failed.';
+                        console.error('Processing failed:', processData.message);
+                    }
+                } else {
+                    status.textContent = 'File upload failed.';
+                    console.error('Upload failed:', data.message);
+                }
+            } catch (error) {
+                console.error('Error during upload or processing:', error);
+                status.textContent = `Error: ${error.message}`;
+            }
+        });
+
+        // Exit button logic to go back to helo.html
+        exitButton.addEventListener('click', function () {
+            window.location.href = 'helo.html'; // Redirect back to helo.html
+        });
+    </script>
+</body>
+</html>

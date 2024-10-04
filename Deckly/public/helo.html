@@ -1,0 +1,89 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deckly</title>
+</head>
+<body>
+    <header>
+        <h1>Deckly</h1>
+    </header>
+    <main>
+        <section id="quiz-creator">
+            <h2>Create a Quiz</h2>
+            <button onclick="createQuiz()">Create Quiz</button>
+
+        </section>
+
+        <section id="cue-card-creator">
+            <h2>Create Cue Cards</h2>
+            <button onclick="createCueCard()">Create Cue Card</button>
+            
+        </section>
+
+        <section id="Read Notes">
+            <h2>Read Notes</h2>
+            <button onclick="readNotes()">Read Notes</button>
+
+        </section>
+
+    </main>
+    <script src="main.js"></script>
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deckly</title>
+</head>
+<body>
+    <header>
+        <h1>Deckly</h1>
+    </header>
+    <main>
+        <section id="quiz-creator">
+            <h2>Create a Quiz</h2>
+            <button onclick="createQuiz()">Create Quiz</button>
+        </section>
+
+        <section id="cue-card-creator">
+            <h2>Create Cue Cards</h2>
+            <button onclick="createCueCard()">Create Cue Card</button>
+        </section>
+
+        <section id="read-notes">
+            <h2>Read Notes</h2>
+            <button onclick="readNotes()">Read Notes</button>
+        </section>
+
+        <!-- New Section for Image Processing -->
+        <section id="image-processing">
+            <h2>Upload Image and Create Quiz</h2>
+            <button onclick="processImage()">Upload and Process Image</button>
+        </section>
+    </main>
+
+    <script>
+        function createQuiz() {
+            window.location.href = 'quizPage.html';
+        }
+
+        function createCueCard() {
+            window.location.href = 'accountPage.html';
+        }
+
+        function readNotes() {
+            window.location.href = 'readNote.html';
+        }
+
+        function processImage() {
+            window.location.href = 'index.html'; // Redirect to image processing page
+        }
+    </script>
+</body>
+</html>
+
