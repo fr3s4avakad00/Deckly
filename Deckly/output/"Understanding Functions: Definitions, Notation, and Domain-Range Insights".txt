@@ -1,0 +1,41 @@
+Topic: "Understanding Functions: Definitions, Notation, and Domain-Range Insights"
+
+Multiple Choice Questions:
+ Here are some multiple-choice questions based on the provided image description:
+
+ Question 1: 
+What is the definition of a function in mathematics?
+A) A relation where each x value corresponds to many y values.  
+B) A relation where each x value corresponds to at least one y value.  
+C) A relation where each x value corresponds to exactly one y value. **(Correct Answer)**  
+D) A relation with no restrictions on x or y values.
+
+ ---
+
+ Question 2: 
+Which of the following is an example of function notation?
+A) \( g(x) = x^2 \)  
+B) \( y = 2x + 3 \)  
+C) Both A and B **(Correct Answer)**  
+D) None of the above
+
+ ---
+
+ Question 3: 
+What does the "domain" of a function refer to?
+A) The set of all possible y-values.  
+B) The set of x-values you can use in the function. **(Correct Answer)**  
+C) The highest value of y in a graph.  
+D) The graphical representation of the function.
+
+ ---
+
+ Question 4: 
+In terms of a function, what is meant by "range"?
+A) The distance between the highest and lowest x-values.  
+B) The set of possible y-values resulting from using the function. **(Correct Answer)**  
+C) The list of all inputs for a function.  
+D) The slope of the function on a graph.
+
+ ---
+
