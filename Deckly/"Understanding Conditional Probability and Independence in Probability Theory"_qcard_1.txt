@@ -1,2 +1,0 @@
-Question: What is the mathematical representation of conditional probability?
-Answer: C) P(A | B)
